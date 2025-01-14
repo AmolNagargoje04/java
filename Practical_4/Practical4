@@ -1,0 +1,132 @@
+class Practical_4
+{
+// getByte method
+public static int getByte(int num) {
+   ...>     int result = num;
+   ...> 
+   ...>     while (result > 127) {
+   ...>         result -= 256; 
+   ...>     }
+   ...>     while (result < -128) {
+   ...>         result += 256; 
+   ...>     }
+   ...> 
+   ...>     return result
+
+// getShort method
+public static int getShort(int num) {
+    int result = num;
+
+    while (result > 32767) {
+        result -= 65536;
+    }
+    while (result < -32768) {
+        result += 65536; 
+    }
+
+    return result;
+}
+
+//getNumber
+public static int getNumber(int num, String type) {
+    int result = num;
+
+    if ("byte".equals(type)) {
+        // Handle conversion to byte (range [-128, 127])
+        while (result > 127)
+        {
+            result -= 256; 
+        }
+        while (result < -128) {
+            result += 256; 
+        }
+    } else if ("short".equals(type)) 
+    {
+       
+        while (result > 32767) {
+            result -= 65536;
+        }
+        while (result < -32768) {
+            result += 65536; 
+        }
+    } else {
+        System.out.println("Invalid,  choose byte or short.");
+        return num; 
+    }
+
+    return result; 
+}
+
+
+
+//toXXSystem method
+    public static String toXXSystem(String num, String xx)
+    {
+        // Decimal to Binary
+        if ("2".equalsIgnoreCase(xx) || "binary".equalsIgnoreCase(xx) || "b".equalsIgnoreCase(xx)) {
+            int decimal = Integer.parseInt(num);
+            StringBuilder binary = new StringBuilder();
+            while (decimal > 0) {
+                binary.insert(0, decimal % 2);
+                decimal /= 2;
+            }
+            return binary.toString();
+        }
+        
+        // Decimal to Octal
+        else if ("8".equalsIgnoreCase(xx) || "octal".equalsIgnoreCase(xx) || "o".equalsIgnoreCase(xx)) {
+            int decimal = Integer.parseInt(num);
+            StringBuilder octal = new StringBuilder();
+            while (decimal > 0) {
+                octal.insert(0, decimal % 8);
+                decimal /= 8;
+            }
+            return octal.toString();
+        }
+        
+        // Decimal to Hexadecimal
+        else if ("16".equalsIgnoreCase(xx) || "hexadecimal".equalsIgnoreCase(xx) || "h".equalsIgnoreCase(xx)) {
+            int decimal = Integer.parseInt(num);
+            StringBuilder hex = new StringBuilder();
+            while (decimal > 0) {
+                int remainder = decimal % 16;
+                hex.insert(0, remainder < 10 ? (char) (remainder + '0') : (char) (remainder - 10 + 'A'));
+                decimal /= 16;
+            }
+            return hex.toString();
+        }
+        
+        
+        
+        // Binary to Decimal
+        if ("10".equalsIgnoreCase(xx) || "decimal".equalsIgnoreCase(xx) || "d".equalsIgnoreCase(xx)) {
+            int decimal = 0;
+            int base = 1;
+            if (num.startsWith("0b") || num.startsWith("0B")) {
+                num = num.substring(2);
+            }
+            for (int i = num.length() - 1; i >= 0; i--) {
+                if (num.charAt(i) == '1') {
+                    decimal += base;
+                }
+                base *= 2;
+            }
+            return Integer.toString(decimal);
+        }
+        
+        // Binary to Hexadecimal
+        else if ("16".equalsIgnoreCase(xx) || "hexadecimal".equalsIgnoreCase(xx) || "h".equalsIgnoreCase(xx)) {
+            int decimal = 0;
+            int base = 1;
+            if (num.startsWith("0b") || num.startsWith("0B")) {
+                num = num.substring(2);
+            }
+            // Convert binary to decimal first
+            for (int i = num.length() - 1; i >= 0; i--) {
+                if (num.charAt(i) == '1') {
+                    decimal += base;
+                }
+                base *= 2;
+            }
+            
+            }
